@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <section id="projects" className="relative px-6 py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="My Work" title="Featured Projects" />
+        <SectionHeading eyebrow="The work" title="Projects that shipped" />
 
         <div className="grid gap-6 md:grid-cols-2">
           {projects.map((p, i) => (

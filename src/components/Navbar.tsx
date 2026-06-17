@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
-
-const links = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
+import { FiLinkedin } from "react-icons/fi";
+import { navLinks, profile } from "../data";
+import CalendlyButton from "./CalendlyButton";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,16 +28,14 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6">
         <a href="#home" className="group flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-accent to-accent-violet font-bold text-bg shadow-glow">
-            H
-          </span>
           <span className="text-lg font-bold tracking-tight">
-            Haroon<span className="gradient-text">.dev</span>
+            {profile.name.split(" ")[0]}
+            <span className="gradient-text">.</span>
           </span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">
-          {links.map((l) => (
+          {navLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -55,11 +47,20 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href="#contact"
-              className="ml-2 rounded-full bg-gradient-to-r from-accent to-accent-violet px-5 py-2 text-sm font-semibold text-bg shadow-glow transition-transform hover:scale-105"
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="ml-1 flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
             >
-              Hire Me
+              <FiLinkedin />
+              LinkedIn
             </a>
+          </li>
+          <li>
+            <CalendlyButton
+              text="Book a call"
+              className="ml-2 rounded-full bg-gradient-to-r from-accent to-accent-violet px-5 py-2 text-sm font-semibold text-bg shadow-glow transition-transform hover:scale-105"
+            />
           </li>
         </ul>
 
@@ -80,7 +81,7 @@ export default function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             className="mx-6 mt-3 overflow-hidden rounded-2xl glass md:hidden"
           >
-            {links.map((l) => (
+            {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
@@ -91,6 +92,12 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+            <li className="px-6 py-3">
+              <CalendlyButton
+                text="Book a 30-min call"
+                className="w-full rounded-full bg-gradient-to-r from-accent to-accent-violet px-5 py-2.5 text-sm font-semibold text-bg shadow-glow"
+              />
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>
